@@ -3,16 +3,7 @@ const mysql = require('mysql');
 var router = express.Router();
 
 
-var config =
-    {
-        host: "sep6db.mysql.database.azure.com",
-        user: "sep6@sep6db",
-        password: "Sepsix1234",
-        database: 'united_airplanes_db',
-        ssl: true
-    };
-
-const conn = new mysql.createConnection(config);
+var conn = mysql.createConnection({host: "sep6db.mysql.database.azure.com", user: "sep6@sep6db", password: {your_password}, database: {your_database}, port: 3306, ssl:{true}});
 
 conn.connect(
     function (err) {
