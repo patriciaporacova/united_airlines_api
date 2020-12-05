@@ -12,7 +12,7 @@ var config =
       ssl: true
     };
 
-const conn = new mysql.createConnection(process.env["MS_TableConnectionString"]);
+const conn = new mysql.createConnection(MYSQLCONNSTR_MS_TableConnectionString);
 
 conn.connect(
     function (err) {
