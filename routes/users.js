@@ -1,9 +1,9 @@
-var express = require('express');
+let express = require('express');
 const mysql = require('mysql');
-var router = express.Router();
+let router = express.Router();
 
 
-var config =
+let config =
     {
       host: "sep6db.mysql.database.azure.com",
       user: "sep6@sep6db",
@@ -12,7 +12,7 @@ var config =
       ssl: true
     };
 
-const conn = new mysql.createConnection(MYSQLCONNSTR_MS_TableConnectionString);
+let conn = mysql.createConnection(config);
 
 conn.connect(
     function (err) {
