@@ -5,34 +5,32 @@ let router = express.Router();
 
 let config =
     {
-      host: "sep6db.mysql.database.azure.com",
-      user: "sep6@sep6db",
-      password: process.env.YourAppSetting,
-      database: 'united_airplanes_db',
-      ssl: true
+        host: "sep6db.mysql.database.azure.com",
+        user: "sep6@sep6db",
+        password: "Sepsix1234",
+        database: 'united_airplanes_db',
+        ssl: true
     };
 
-let conn = mysql.createConnection(config);
+const conn = new mysql.createConnection(config);
 
 conn.connect(
     function (err) {
-      if (err) {
-        console.log("!!! Cannot connect !!! Error:");
-        throw err;
-      }
-      else {
-        console.log("Connection established.");
-      }
+        if (err) {
+            console.log("!!! Cannot connect !!! Error:");
+            throw err;
+        } else {
+            console.log("Connection established.");
+        }
     });
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-
+router.get('/', function (req, res, next) {
     let q = "select * from airlines";
     conn.query(q, function (error, results) {
-      if (error) throw error;
-      res.setHeader('content-type', 'application/json');
-      res.send(results);
+        if (error) throw error;
+        res.setHeader('content-type', 'application/json');
+        res.send(results);
     });
 });
 
@@ -85,7 +83,6 @@ module.exports = function (context, req) {
 
 };
 */
-
 
 
 module.exports = router;
