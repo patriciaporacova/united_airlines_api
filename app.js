@@ -1,16 +1,30 @@
-let createError = require('http-errors');
-let express = require('express');
-let path = require('path');
-let cookieParser = require('cookie-parser');
-let logger = require('morgan');
-let cors = require('cors')
+const createError = require('http-errors');
+const logger = require('morgan');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const cors = require('cors');
+const mysql = require('mysql');
+const myConnection = require("express-myconnection");
 
 let indexRouter = require('./routes/index');
-let usersRouter = require('./routes/users');
+let flightsRouter = require('./routes/flights');
+let planesRouter = require('./routes/planes');
+let weatherRouter = require('./routes/weather');
 
-let app = express();
+let config =
+    {
+      host: "sep6db.mysql.database.azure.com",
+      user: "sep6@sep6db",
+      password: "Sepsix1234",
+      database: 'united_airplanes_db',
+      ssl: true
+    };
+
+const app = express();
 
 app.use(cors())
+app.use(myConnection(mysql, config, 'single'));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -23,7 +37,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/flights', flightsRouter);
+app.use('/weather', weatherRouter);
+app.use('/planes', planesRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
